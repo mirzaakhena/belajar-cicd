@@ -7,21 +7,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: "Checkout"
+        uses: actions/checkout@v3
 
       - name: Run a one-line script
         run: echo Hello, world!
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: "v18.17.0" # Set this to the version of Node.js that your project uses
+          node-version: "18.x" # Set this to the version of Node.js that your project uses
 
       - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
-        run: npm run test
+        run: npm ci
 
       - name: Run Test
-        run: npm run test
+        run: npm test
