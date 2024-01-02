@@ -1,34 +1,43 @@
-name: Hello World CI
+name: CI/CD Pipeline
 
 on: [push]
 
 jobs:
-  build:
+  build-test-and-push:
     runs-on: ubuntu-latest
-
     steps:
-      - name: "Checkout"
-        uses: actions/checkout@v3
+      # Checkout the code
+      - uses: actions/checkout@v3
 
-      - name: Run a one-line script
-        run: echo Hello, world!
+      # Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-      # - name: Set up Node.js
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: "18.x" # Set this to the version of Node.js that your project uses
+      # Build the Docker image with Buildx
+      - name: Build Docker image with Buildx
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          load: true
+          tags: mirzaakhena/calculator:latest
 
-      # - name: Install dependencies
-      #   run: npm ci
-
-      # - name: Build Project
-      #   run: npm run build
-
-      # - name: Run Test
-      #   run: npm test
-
-      - name: Build Docker Image
-        run: docker build -t myapp .
-
+      # Run tests using the built Docker image
       - name: Run Tests in Docker
-        run: docker run myapp npm test
+        run: docker run mirzaakhena/calculator:latest npm test
+
+      # Login to Docker Hub
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # Push the Docker image to Docker Hub
+      - name: Push Docker image to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: mirzaakhena/calculator:latest
