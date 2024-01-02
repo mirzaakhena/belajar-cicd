@@ -1,0 +1,5 @@
+.env
+coverage/
+dist/
+jest.config.json
+node_modules/
