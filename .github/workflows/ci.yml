@@ -13,16 +13,22 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18.x" # Set this to the version of Node.js that your project uses
+      # - name: Set up Node.js
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: "18.x" # Set this to the version of Node.js that your project uses
 
-      - name: Install dependencies
-        run: npm ci
+      # - name: Install dependencies
+      #   run: npm ci
 
-      - name: Build Projecy
-        run: npm run build
+      # - name: Build Project
+      #   run: npm run build
 
-      - name: Run Test
-        run: npm test
+      # - name: Run Test
+      #   run: npm test
+
+      - name: Build Docker Image
+        run: docker build -t myapp .
+
+      - name: Run Tests in Docker
+        run: docker run myapp npm test
