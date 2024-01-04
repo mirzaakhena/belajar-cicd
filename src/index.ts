@@ -6,10 +6,13 @@ import express from "express";
 const app = express();
 
 app.get("/", (req, res) => {
-  // res.send(process.env.MESSAGE || "alhamdulillah");
-
   console.log("API called");
   res.json({ message: "Alhamdulillah" });
+});
+
+app.get("/health", (req, res) => {
+  console.log("Health called");
+  res.status(200).send("OK");
 });
 
 app.listen(3000, () => {
