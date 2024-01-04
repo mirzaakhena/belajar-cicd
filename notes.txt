@@ -1,0 +1,29 @@
+eksctl create cluster --name my-learning-cluster --region us-east-1 --nodes 1 --node-type t2.micro
+eksctl delete cluster --name my-learning-cluster
+
+
+----------
+
+eksctl create cluster --name mirza-eks-fargate --region us-east-1 --fargate
+eksctl delete cluster --name mirza-eks-fargate --region us-east-1
+
+eksctl create cluster --name mirza-eks-fargate --region us-east-1 --zones us-east-1a,us-east-1b,us-east-1c --fargate
+aws eks update-kubeconfig --region us-east-1 --name mirza-eks-fargate
+
+----------
+
+kubectl get nodes
+kubectl get pods --all-namespaces
+kubectl get svc --all-namespaces
+kubectl describe pod <pod-name> -n <namespace>
+kubectl logs <pod-name> -n <namespace>
+kubectl get deployments
+kubectl proxy
+
+----------
+
+kubectl apply -f ./k8s/deployment.yml
+kubectl apply -f ./k8s/service.yml
+
+
+

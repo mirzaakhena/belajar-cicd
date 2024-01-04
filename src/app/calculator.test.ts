@@ -1,4 +1,4 @@
-import { calculator } from "./logic";
+import { calculator } from "./calculator";
 
 describe("calculator", () => {
   it("should add two numbers", () => {

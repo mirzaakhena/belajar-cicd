@@ -1,13 +1,13 @@
 import express from "express";
 import dotenv from "dotenv";
-import { calculator } from "./logic";
+import { calculator } from "./calculator";
 
 dotenv.config();
 
 export const helloRouter = express.Router();
 
 helloRouter.get("/", (req, res) => {
-  res.send(process.env.MESSAGE);
+  res.send(process.env.MESSAGE || "alhamdulillah");
 });
 
 helloRouter.get("/calculator", (req, res) => {
