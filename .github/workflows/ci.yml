@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Checkout the code
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       # Set up Docker Buildx
       - name: Set up Docker Buildx
@@ -41,6 +41,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: mirzaakhena/calculator:latest
+          platforms: linux/amd64,linux/arm64
 
       # # Configure AWS credentials
       # - name: Configure AWS credentials
